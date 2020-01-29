@@ -1,0 +1,134 @@
+@keyframes sunflower_ani{
+  0%, 100%, 16%, 40%, 48%, 8% {
+    -webkit-transform: rotate(0deg);
+  } 
+  12%, 4%, 44% { 
+    -webkit-transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes eye_ani{
+  0%, 100%, 16%, 40%, 48%, 8% {
+    -webkit-transform: scaleY(1)
+  } 
+  12%, 4%, 44% { 
+    -webkit-transform: scaleY(.3)
+  }
+}
+@keyframes ebow_ani{
+  0%, 100%, 16%, 40%, 48%, 8% {
+    -webkit-transform: translateY(0px);
+  } 
+  12%, 4%, 44% { 
+    -webkit-transform: translateY(2px);
+  }
+}
+@keyframes mouse_ani{
+  0%, 20%, 40%, 60%, 80%, 100% {
+    -webkit-transform: translateY(0px);
+  } 
+  10%, 30%, 50%, 70%, 90% { 
+    -webkit-transform: scale(1.1);
+  }
+}
+@keyframes cao_ani{
+  0%, 20%, 40%, 60%, 80%, 100% {
+    -webkit-transform: rotateZ(45deg);
+  } 
+  10%, 30%, 50%, 70%, 90% { 
+    -webkit-transform: rotateZ(-45deg);
+  }
+}
+@keyframes redpack_ani {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+.person-girl {
+  position: absolute;
+  width: 120px;
+  bottom: 0px;
+  .lego {
+    width: 120px;
+    height: 165px;
+  }
+  .sunflower {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    left: -12px;
+    top: 38px;
+    -webkit-animation: sunflower_ani 4s infinite;
+    animation: sunflower_ani 4s infinite;
+  }
+  .eye {
+    position: absolute;
+    background: #000;
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    -webkit-animation: eye_ani 4s infinite;
+    animation: eye_ani 4s infinite;
+    &-left {
+      top: 33px;
+      left: 52.5px;
+    }
+    &-right {
+      top: 33px;
+      left: 65px;
+    }
+  }  
+}
+
+.person-boy {
+  position: absolute;
+  width: 228px;
+  left: 82px;
+  bottom: -4px;
+  .lego {
+    width: 228px;
+    height: 166px;
+  }
+  .ebow {
+    position: absolute;
+    width: 25px;
+    left: 46px;
+    top: 25px;
+    -webkit-animation: ebow_ani 4s infinite;
+    animation: ebow_ani 4s infinite;
+  }
+  .mouse {
+    position: absolute;
+    width: 24px;
+    left: 47.9px;
+    top: 36px;
+    -webkit-animation: mouse_ani 2s infinite;
+    animation: mouse_ani 2s infinite;
+  }
+  .redpack {
+    position: absolute;
+    width: 20px;    
+    left: 67px;
+    top: 72px;
+    -webkit-animation: redpack_ani 1s infinite;
+    animation: redpack_ani 1s infinite;
+  }
+  .cao {
+    position: absolute;
+    width: 33px;
+    right: 47px;
+    top: 72px;
+    transform-origin: left;
+    -webkit-animation: cao_ani 2s infinite;
+    animation: cao_ani 2s infinite;
+  }  
+}
