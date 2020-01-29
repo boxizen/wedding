@@ -1,6 +1,6 @@
 <template>
   <div class="wedding">
-    <!-- <div class="homepage pages">
+    <div class="homepage pages">
       <img class="banner" src="./images/logo.png"> 
       <div class="content">
         <div class="person-girl">
@@ -35,11 +35,11 @@
         <img class="plant plant4" src="./images/plant4.png" />
         <img class="plant plant5" src="./images/plant5.png" />
       </div>
-    </div> -->
-    <div class="pages">
+    </div>
+    <!-- <div class="pages">
       <img class="banner" src="./images/logo.png"> 
       <img src="./images/wedding/fuckhorse3.jpg" />
-    </div>
+    </div> -->
     <invitation :canOpen="canOpen" @onClose="canOpen = false, hasClosed = true" />
   </div>
 </template>
