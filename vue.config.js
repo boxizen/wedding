@@ -1,4 +1,3 @@
 module.exports = {
-  publicPath: "/" 
-  // process.env.NODE_ENV === "test" ? "/" : '/dist/', // 相对于 HTML 页面（目录相同）
+  publicPath: process.env.NODE_ENV === "test" ? "/" : 'https://cdn.jsdelivr.net/gh/boxizen/wedding@1.0/',
 }
