@@ -40,7 +40,7 @@ after_deploy:
   - echo afterdeploy
   - git config --global user.email "boxizeng@tencent.com"
   - git config --global user.name "boxizeng"
-  - export GIT_TAG=$TRAVIS_BRANCH-2.$TRAVIS_BUILD_NUMBER
+  - export GIT_TAG=ghpages-2.$TRAVIS_BUILD_NUMBER
   - echo 'tagName:' $GIT_TAG
   - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
-  - git push -q https://$GITHUB_TOKEN@github.com/boxizen/wedding gh-pages --tags  
+  - git push -q https://$GITHUB_TOKEN@github.com/boxizen/wedding origin/gh-pages --tags  
