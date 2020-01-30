@@ -1,18 +1,32 @@
 language: node_js # 构建所需的语言环境
+
 node_js:
   - "v8.12.0"  # 对应的版本
+
 branches:
   only:
   - master    # 构建的分支
+
 cache:
   directories:
   - node_modules # 依赖缓存的目录
+
 before_install:
 - export TZ='Asia/Shanghai'  # 设置时区
+
 install:
  - npm install # 安装编译工具
+
 script:
 - npm run build
+
+before_deploy:
+  # Set up git user name and tag this commit
+  - git config --local user.name "boxizeng"
+  - git config --local user.email "boxizeng@tencent.com"
+  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+  - git tag $TRAVIS_TAG
+
 deploy:
   provider: pages
   skip-cleanup: true
@@ -21,4 +35,11 @@ deploy:
   target-branch: gh-pages
   verbose: true
   on:
+    branch: master
+  provider: releases
+  api_key: $GITHUB_TOKEN
+  file: dist/*
+  skip_cleanup: true
+  on:
+    tags: true
     branch: master
