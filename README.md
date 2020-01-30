@@ -1,4 +1,4 @@
-# 程序员的婚礼邀请函
+# 婚礼邀请函
 
 [![Build Status](https://travis-ci.com/boxizen/wedding.svg?branch=master)](https://travis-ci.com/boxizen/wedding)
 
