@@ -20,26 +20,26 @@ install:
 script:
 - npm run build
 
-before_deploy:
+deploy:
+  - provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN # github 上的token环境变量
+  local-dir: dist ## 根据情况自定义到静态文件输出目录
+  target-branch: gh-pages
+  verbose: true
+  on:
+    branch: master
+  # provider: releases
+  # api_key: $GITHUB_TOKEN
+  # file: dist/*
+  # skip_cleanup: true
+  # on:
+  #   tags: false    
+
+after_deploy:
   - git config --global user.email "boxizeng@tencent.com"
   - git config --global user.name "boxizeng"
-  - export GIT_TAG=$TRAVIS_BRANCH-0.1.$TRAVIS_BUILD_NUMBER
+  - export GIT_TAG=$TRAVIS_BRANCH-2.$TRAVIS_BUILD_NUMBER
   - echo 'tagName:' $GIT_TAG
   - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
-  - git push -q https://$GITHUB_TOKEN@github.com/boxizen/wedding --tags  
-
-deploy:
-  # - provider: pages
-  # skip-cleanup: true
-  # github-token: $GITHUB_TOKEN # github 上的token环境变量
-  # local-dir: dist ## 根据情况自定义到静态文件输出目录
-  # target-branch: gh-pages
-  # verbose: true
-  # on:
-  #   branch: master
-  provider: releases
-  api_key: $GITHUB_TOKEN
-  file: dist/*
-  skip_cleanup: true
-  on:
-    tags: false    
+  - git push -q https://$GITHUB_TOKEN@github.com/boxizen/wedding gh-pages --tags  
