@@ -25,7 +25,7 @@ before_deploy:
   - git config --global user.name "boxizeng"
   - export GIT_TAG=$TRAVIS_BRANCH-0.1.$TRAVIS_BUILD_NUMBER
   - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
-  - git push -q https://github.com/boxizen/wedding --tags
+  - git push -q https://$GITHUB_TOKEN@github.com/boxizen/wedding --tags
   - ls -R
 
 deploy:
