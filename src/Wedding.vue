@@ -1,6 +1,6 @@
 <template>
   <div class="wedding">
-    <div class="homepage pages">
+    <div class="homepage pages page0" style="transform: translate(0%, 0%)">
       <img class="banner" src="./images/logo.png"> 
       <div class="content">
         <div class="person-girl">
@@ -36,16 +36,29 @@
         <img class="plant plant5" src="./images/plant5.png" />
       </div>
     </div>
-    <!-- <div class="pages">
+    <div class="pages page1" style="transform: translate(0%, 100%)">
       <img class="banner" src="./images/logo.png"> 
-      <img src="./images/wedding/fuckhorse3.jpg" />
-    </div> -->
+      <img src="./images/wedding/mm.jpg" />
+    </div>
+    <div class="pages page2" style="transform: translate(0%, 200%)">
+      <img class="banner" src="./images/logo.png"> 
+      <img src="./images/wedding/mm.jpg" />
+    </div>
+    <div class="pages page3" style="transform: translate(0%, 300%)">
+      <img class="banner" src="./images/logo.png"> 
+      <img src="./images/wedding/mm.jpg" />
+    </div>
+    <div class="pages page4" style="transform: translate(0%, 400%)">
+      <img class="banner" src="./images/logo.png"> 
+      <img src="./images/wedding/mm.jpg" />
+    </div>
     <invitation :canOpen="canOpen" @onClose="canOpen = false, hasClosed = true" />
+    <audio src="./music/bgm.mp3" id="player" loop autoplay preload />
   </div>
 </template>
 
 <script>
-  // import Editor from "./components/Editor.vue"
+  import { swipeInit } from "./utils/swipe"
   import Invitation from './components/Invitation'
 
   export default {
@@ -55,13 +68,45 @@
     },
     data () {
       return {
-        canOpen: false
+        canOpen: false,
+        hasClick: false,
+        crtPage: 0,
+        pageNum: 5
       }      
     },
     methods: {
       handleOpenPack () {
         this.canOpen = true;
       }
+    },
+    mounted() {
+      swipeInit(function(direction) {
+        let crt = this.crtPage;
+        let num = this.pageNum;        
+        let next;
+        if(direction === 'up' && (crt + 1) < num) {          
+          next = crt + 1;          
+        } else if(direction === 'down' && (crt - 1) >= 0){
+          next = crt - 1;
+        } else {
+          return ;
+        }
+        this.crtPage = next;
+        for(let i = 0; i < num; i++) {
+          document.querySelector(`.page${i}`).style.transform = `translate(0, ${100 * (i - next)}%)`
+        }
+      }.bind(this));
+      const player = document.querySelector('#player');
+      document.addEventListener("WeixinJSBridgeReady", function () { 
+        this.hasClick = true;
+        player.play(); 
+      }, false);
+      document.body.addEventListener('click', e => {
+        if(!this.hasClick) {
+          this.hasClick = true;          
+          player.play();
+        }       
+      });
     },
     name: 'Wedding'
   }
@@ -78,6 +123,22 @@ body{
   height: 100%;
   overflow: hidden;
 }
+@keyframes banner_ani{
+  0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100% {
+    -webkit-transform: scale(1.1);
+  } 
+  5%, 15%, 25%, 35%, 45%, 55%, 65%, 75%, 85%, 95% { 
+    -webkit-transform: scale(1);
+  }
+}
+@keyframes bubble_ani{
+  0%, 100% {
+    -webkit-transform: scale(0);
+  } 
+  10%, 80% { 
+    -webkit-transform: scale(1);
+  }
+}
 .wedding{
   position: relative;
   max-width: 568px!important;
@@ -86,17 +147,20 @@ body{
   margin: 0 auto;
   perspective: 500px;
   .pages {
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
+    transition: all .8s;
     .banner {
       width: 180px;
       height: 185px;
       margin-top: 50px;
+      -webkit-animation: banner_ani 7s infinite;
+      animation: banner_ani 7s infinite;
     }
     .content {
       transform: scale(0.65);
@@ -119,14 +183,6 @@ body{
         top: -10px;
       }
     }    
-    @keyframes bubble_ani{
-      0%, 100% {
-        -webkit-transform: scale(0);
-      } 
-      10%, 80% { 
-        -webkit-transform: scale(1);
-      }
-    }
     .bubble {
       position: absolute;
       width: 170px;
