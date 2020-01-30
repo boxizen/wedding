@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === "test" ? "/" : 'https://cdn.jsdelivr.net/gh/boxizen/wedding@1.9/',
+  publicPath: process.env.NODE_ENV === "test" ? "/" : 'https://cdn.jsdelivr.net/gh/boxizen/wedding@1.91/',
 }
