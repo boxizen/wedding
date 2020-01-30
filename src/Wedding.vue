@@ -1,5 +1,6 @@
 <template>
   <div class="wedding">
+    <img class="dot" src="./images/musicdot.png" @click="handlePlayOrPause"> 
     <div class="homepage pages page0" style="transform: translate(0%, 0%)">
       <img class="banner" src="./images/logo.png"> 
       <div class="content">
@@ -53,7 +54,7 @@
       <img src="./images/wedding/mm.jpg" />
     </div>
     <invitation :canOpen="canOpen" @onClose="canOpen = false, hasClosed = true" />
-    <audio src="./music/bgm.mp3" id="player" loop autoplay preload />
+    <audio src="./music/cnm.mp3" id="player" loop autoplay preload />
   </div>
 </template>
 
@@ -71,12 +72,21 @@
         canOpen: false,
         hasClick: false,
         crtPage: 0,
-        pageNum: 5
+        pageNum: 5,
+        playing: false
       }      
     },
     methods: {
       handleOpenPack () {
         this.canOpen = true;
+      },
+      handlePlayOrPause() {
+        let $audio = document.getElementById('player');
+        if(this.playing) {
+          $audio.pause();
+        } else {
+          $audio.play();
+        }
       }
     },
     mounted() {
@@ -100,13 +110,23 @@
       document.addEventListener("WeixinJSBridgeReady", function () { 
         this.hasClick = true;
         player.play(); 
+        
       }, false);
       document.body.addEventListener('click', e => {
         if(!this.hasClick) {
-          this.hasClick = true;          
+          this.hasClick = true;
           player.play();
         }       
       });
+      let $audio = document.getElementById('player');
+      $audio.addEventListener("playing", function() {
+        document.querySelector(`.dot`).className = "dot spin";
+        this.playing = true;
+      }.bind(this));
+      $audio.addEventListener("pause", function() {
+        document.querySelector(`.dot`).className = "dot";
+        this.playing = false;
+      }.bind(this));
     },
     name: 'Wedding'
   }
@@ -122,6 +142,14 @@ html,
 body{
   height: 100%;
   overflow: hidden;
+}
+@keyframes dot_ani {
+  0% {
+    -webkit-transform: rotate(0deg)
+  }
+  100% {
+    -webkit-transform: rotate(360deg)
+  } 
 }
 @keyframes banner_ani{
   0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100% {
@@ -146,6 +174,18 @@ body{
   min-height: 100%;
   margin: 0 auto;
   perspective: 500px;
+  .dot {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: 35px;
+    height: 35px;    
+    z-index: 999;
+  }
+  .spin {
+    -webkit-animation: dot_ani 1s linear infinite;
+    animation: dot_ani 1s linear infinite;
+  }
   .pages {
     position: absolute;
     width: 100%;
