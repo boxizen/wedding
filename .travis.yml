@@ -20,12 +20,13 @@ install:
 script:
 - npm run build
 
-# before_deploy:
-#   # Set up git user name and tag this commit
-#   - git config --local user.name "boxizeng"
-#   - git config --local user.email "boxizeng@tencent.com"
-#   - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
-#   - git tag $TRAVIS_TAG
+before_deploy:
+  - git config --global user.email "builds@travis-ci.com"
+  - git config --global user.name "Travis CI"
+  - export GIT_TAG=$TRAVIS_BRANCH-0.1.$TRAVIS_BUILD_NUMBER
+  - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
+  - git push -q https://$TAGPERM@github.com/RlonRyan/JBasicX --tags
+  - ls -R
 
 deploy:
   # - provider: pages
@@ -41,4 +42,5 @@ deploy:
   file: dist/*
   skip_cleanup: true
   on:
-    tags: true
+    tags: false
+    all_branches: true
