@@ -30,11 +30,11 @@ async function start() {
       cwd
     });
     console.log('branchRes:', branchRes);
-    let logRes = await runCommand("git", ["log"], {
-      cwd
-    });
+    // let logRes = await runCommand("git", ["log"], {
+    //   cwd
+    // });
     // console.log('logRes:', logRes);
-    await runCommand("git", ["checkout", "origin/gh-pages"], {
+    await runCommand("git", ["checkout", "gh-pages/gh-pages"], {
       cwd
     });
     let commitId = await runCommand("git", ["rev-parse", "--short", "gh-pages"], {
