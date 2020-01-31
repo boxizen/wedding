@@ -20,6 +20,15 @@ async function start() {
     let fetchRes = await runCommand("git", ["fetch", "origin", "gh-pages"], {
       cwd
     });
+    console.log('fetchRes:', fetchRes);
+    let branchRes = await runCommand("git", ["branch"], {
+      cwd
+    });
+    console.log('branchRes:', branchRes);
+    let logRes = await runCommand("git", ["log"], {
+      cwd
+    });
+    console.log('logRes:', logRes);
     await runCommand("git", ["checkout", "origin/gh-pages"], {
       cwd
     });
