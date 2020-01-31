@@ -1,5 +1,5 @@
 const runCommand = require('./runCommand');
-const path = require('path');
+// const path = require('path');
 const conf = require('../conf');
 const cwd = "/home/travis/build/boxizen/wedding"; //path.resolve(__dirname, "../");
 const api = `https://api.github.com/repos/boxizen/wedding/releases`;
@@ -15,10 +15,9 @@ let body = {
 }
 
 const TOKEN = process.argv[2];
-console.log('pass token:', TOKEN);
 
 async function start() {
-  await runCommand("git", ["pull"], {
+  await runCommand("git", ["fetch", "origin", "gh-pages"], {
     cwd
   });
   let commitId = await runCommand("git", ["rev-parse", "--short", "gh-pages"], {
