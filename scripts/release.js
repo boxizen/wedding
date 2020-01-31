@@ -20,7 +20,9 @@ async function start() {
     let fetchRes = await runCommand("git", ["fetch", "origin", "gh-pages"], {
       cwd
     });
-    console.log('fetchRes:', fetchRes);
+    await runCommand("git", ["checkout", "origin/gh-pages"], {
+      cwd
+    });
     let commitId = await runCommand("git", ["rev-parse", "--short", "gh-pages"], {
       cwd
     });
