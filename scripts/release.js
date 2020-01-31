@@ -29,9 +29,6 @@ async function start() {
     await runCommand("git", ["fetch", "gh-pages"], {
       cwd
     });
-    // let branchRes = await runCommand("git", ["branch"], {
-    //   cwd
-    // });
     await runCommand("git", ["checkout", "gh-pages/gh-pages"], {
       cwd
     });
@@ -42,11 +39,12 @@ async function start() {
     await runCommand("git", ["tag", "-a", conf.tag, commitId, "-m", `"${conf.tag}"`], {
       cwd
     });
-
-    await runCommand("git", ["push", "-q", `https://${TOKEN}@github.com/boxizen/wedding`, "gh-pages/gh-pages", "--tags"], {
-      cwd
-    });
-    let res = await runCommand("curl", ["-H", `Authorization: token ${TOKEN}`, "-X", "POST", "-d", JSON.stringify(body), api], {
+    try {
+      await runCommand("git", ["push", "-q", `https://${TOKEN}@github.com/boxizen/wedding`, "gh-pages/gh-pages", "--tags"], {
+        cwd
+      });
+    } catch(e) {}
+    await runCommand("curl", ["-H", `Authorization: token ${TOKEN}`, "-X", "POST", "-d", JSON.stringify(body), api], {
       cwd
     })
   } catch(e) {
