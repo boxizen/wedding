@@ -26,18 +26,14 @@ async function start() {
       cwd
     });
     console.log('fetchRes:', fetchRes);    
-    let branchRes = await runCommand("git", ["branch", "-r"], {
+    let branchRes = await runCommand("git", ["branch"], {
       cwd
     });
     console.log('branchRes:', branchRes);
-    // let logRes = await runCommand("git", ["log"], {
-    //   cwd
-    // });
-    // console.log('logRes:', logRes);
     await runCommand("git", ["checkout", "gh-pages/gh-pages"], {
       cwd
     });
-    let commitId = await runCommand("git", ["rev-parse", "--short", "gh-pages"], {
+    let commitId = await runCommand("git", ["rev-parse", "--short", "gh-pages/gh-pages"], {
       cwd
     });
     commitId = commitId.replace(/\n/g,'')
