@@ -44,4 +44,4 @@ after_deploy:
   # - echo 'tagName:' $GIT_TAG
   # - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
   # - git push -q https://$GITHUB_TOKEN@github.com/boxizen/wedding origin/gh-pages --tags  
-  - node ./release.js $GITHUB_TOKEN
+  - node ./scripts/release.js $GITHUB_TOKEN
