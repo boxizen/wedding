@@ -42,7 +42,9 @@ async function start() {
     await runCommand("git", ["tag", "-a", conf.tag, commitId, "-m", `"${conf.tag}"`], {
       cwd
     });
-    await runCommand("git", ["push", "--tags"], {
+    console.log('commit id...:', commitId);
+
+    await runCommand("git", ["push", "-q", `https://${TOKEN}@github.com/boxizen/wedding`, "gh-pages/gh-pages", "--tags"], {
       cwd
     });
     let res = await runCommand("curl", ["-H", `Authorization: token ${TOKEN}`, "-X", "POST", "-d", JSON.stringify(body), api], {
