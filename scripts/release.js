@@ -17,7 +17,7 @@ const TOKEN = process.argv[2];
 
 async function start() {
   try {
-    let fetchRes = await runCommand("git", ["fetch", "origin", "gh-pages"], {
+    let fetchRes = await runCommand("git", ["fetch"], {
       cwd
     });
     console.log('fetchRes:', fetchRes);
