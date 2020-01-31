@@ -1,5 +1,5 @@
 module.exports = {
-  tag: "1.99",
+  tag: "2.0",
   email: "boxizeng@tencent.com",
   name: "boxizeng"
 }
