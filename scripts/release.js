@@ -1,7 +1,7 @@
 const runCommand = require('./runCommand');
 const path = require('path');
 const conf = require('../conf');
-const cwd = path.resolve(__dirname, "../");
+const cwd = "/home/travis/build/boxizen/wedding"; //path.resolve(__dirname, "../");
 const api = `https://api.github.com/repos/boxizen/wedding/releases`;
 
 
@@ -17,10 +17,7 @@ let body = {
 const TOKEN = process.argv[2];
 console.log('pass token:', TOKEN);
 
-async function start() {    
-  await runCommand("cd", ["/home/travis/build/boxizen/wedding"], {
-    cwd
-  });
+async function start() {
   await runCommand("git", ["pull"], {
     cwd
   });
