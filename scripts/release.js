@@ -17,19 +17,21 @@ const TOKEN = process.argv[2];
 
 async function start() {
   try {
-    let listRes = await runCommand("git", ["remote", "add", "gh-pages", "https://github.com/boxizen/wedding.git"], {
+    await runCommand("git", ["config", "--global", "user.email", conf.email], {
       cwd
     });
-    console.log('listRes:', listRes);
-
-    let fetchRes = await runCommand("git", ["fetch", "gh-pages"], {
+    await runCommand("git", ["config", "--global", "user.name", conf.name], {
       cwd
     });
-    console.log('fetchRes:', fetchRes);    
-    let branchRes = await runCommand("git", ["branch"], {
+    await runCommand("git", ["remote", "add", "gh-pages", "https://github.com/boxizen/wedding.git"], {
       cwd
     });
-    console.log('branchRes:', branchRes);
+    await runCommand("git", ["fetch", "gh-pages"], {
+      cwd
+    });
+    // let branchRes = await runCommand("git", ["branch"], {
+    //   cwd
+    // });
     await runCommand("git", ["checkout", "gh-pages/gh-pages"], {
       cwd
     });
