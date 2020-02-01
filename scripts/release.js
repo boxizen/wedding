@@ -17,31 +17,6 @@ const TOKEN = process.argv[2];
 
 async function start() {
   try {
-    // await runCommand("git", ["config", "--global", "user.email", conf.email], {
-    //   cwd
-    // });
-    // await runCommand("git", ["config", "--global", "user.name", conf.name], {
-    //   cwd
-    // });
-    // await runCommand("git", ["remote", "add", "gh-pages", "https://github.com/boxizen/wedding.git"], {
-    //   cwd
-    // });
-    // await runCommand("git", ["fetch", "gh-pages"], {
-    //   cwd
-    // });
-    // await runCommand("git", ["checkout", "gh-pages/gh-pages"], {
-    //   cwd
-    // });
-    // let commitId = await runCommand("git", ["rev-parse", "--short", "gh-pages/gh-pages"], {
-    //   cwd
-    // });
-    // await runCommand("git", ["tag", "-a", conf.tag, commitId, "-m", `"${conf.tag}"`], {
-    //   cwd
-    // });
-    // await runCommand("git", ["push", "-q", `https://${TOKEN}@github.com/boxizen/wedding`, "gh-pages/gh-pages", "--tags"], {
-    //   cwd
-    // });
-
     await Git.config(cwd, ["--global", "user.email", conf.email]);
     await Git.config(cwd, ["--global", "user.name", conf.name]);
     await Git.remote(cwd, ["add", "gh-pages", "https://github.com/boxizen/wedding.git"]);
